@@ -8,11 +8,13 @@ import memberPageState
 import model.MedicinePageState
 import model.MemberPageState
 import model.SupplierPageState
+import model.UserPageState
 import model.database.*
 import org.ktorm.dsl.eq
 import org.ktorm.entity.find
 import scope
 import supplierPageState
+import userPageState
 import viewmodel.*
 
 
@@ -140,4 +142,29 @@ fun editSubCategory() = scope.launch(Dispatchers.IO) {
 
     DashboardViewModel.snackbarHostState.showSnackbar("修改成功")
     getSubCategoriesByCid(viewModel.curCategoryId)
+}
+
+
+fun editUser() = scope.launch(Dispatchers.IO) {
+    val viewModel = HandleUserPageViewModel
+
+    try {
+        db.users
+            .find { it.id eq viewModel.id }!!.apply {
+                name = viewModel.name
+                sex = viewModel.sex
+                phone = viewModel.phone
+                type = viewModel.type
+                idNum = viewModel.idNum
+                flushChanges()
+            }
+    } catch (e: Exception) {
+        DashboardViewModel.snackbarHostState
+            .showSnackbar("修改失败：${e.message}")
+        return@launch
+    }
+    searchUsers()
+    userPageState = UserPageState.List
+    DashboardViewModel.snackbarHostState
+        .showSnackbar("修改成功")
 }

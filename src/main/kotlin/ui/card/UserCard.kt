@@ -16,14 +16,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.database.User
 import ui.contextmenu.UserContextMenu
+import ui.page.HandleMemberPage
+import ui.page.HandleUsererPage
+import viewmodel.HandleMemberPageViewModel
+import viewmodel.HandleUserPageViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun UserCard(user: User) = Card(
     elevation = 4.dp,
-    onClick = {
-
-    },
+    onClick = { HandleUserPageViewModel.startHandleUserPage(user) },
     content = {
         UserContextMenu(user) {
             Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {

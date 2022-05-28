@@ -14,13 +14,11 @@ import kotlinx.coroutines.launch
 import loginSuccessful
 import medicinePageState
 import memberPageState
-import model.MedicinePageState
-import model.MemberPageState
-import model.RailBarItem
-import model.SupplierPageState
+import model.*
 import preferences
 import scope
 import supplierPageState
+import userPageState
 import viewmodel.DashboardViewModel
 import viewmodel.LoginPageViewModel
 
@@ -44,7 +42,7 @@ fun Dashboard() = Row {
                 RailBarItem.MEDICINE -> MedicinePage()
                 RailBarItem.FRE -> FreListPage()
                 RailBarItem.MEMBER -> MemberPage()
-                RailBarItem.USER -> UserListPage()
+                RailBarItem.USER -> UserPage()
                 RailBarItem.SUPPLIER -> SupplierPage()
                 RailBarItem.CATEGORY -> CategoryListPage()
             }
@@ -58,7 +56,7 @@ fun Dashboard() = Row {
 
         // Show snackbar message whenever login successful
         if (loginSuccessful) {
-            LaunchedEffect(DashboardViewModel.snackbarHostState){
+            LaunchedEffect(DashboardViewModel.snackbarHostState) {
                 DashboardViewModel.snackbarHostState.showSnackbar("欢迎登录 MedHub!")
             }
         }
@@ -160,5 +158,14 @@ private fun SupplierPage() = Crossfade(supplierPageState) { state ->
     when (state) {
         SupplierPageState.List -> SupplierListPage()
         else -> HandleSupplierPage()
+    }
+}
+
+
+@Composable
+private fun UserPage() = Crossfade(userPageState) { state ->
+    when (state) {
+        UserPageState.List -> UserListPage()
+        else -> HandleUsererPage()
     }
 }

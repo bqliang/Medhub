@@ -24,6 +24,7 @@ import model.UserSearchCondition
 import ui.card.UserCard
 import ui.view.AutoExtendedFAB
 import ui.view.ScrollToTopBtn
+import viewmodel.HandleUserPageViewModel
 import viewmodel.UserListPageViewModel
 
 private val viewModel = UserListPageViewModel
@@ -64,9 +65,7 @@ fun UserListPage() = Column {
         ScrollToTopBtn(showScrollToTopBtn, state, scope)
 
         AutoExtendedFAB(
-            onClick = {
-
-            },
+            onClick = { HandleUserPageViewModel.startHandleUserPage() },
             state = state
         )
     }

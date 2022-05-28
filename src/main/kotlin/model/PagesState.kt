@@ -6,6 +6,12 @@ enum class MemberPageState {
     Edit
 }
 
+enum class UserPageState {
+    List,
+    Add,
+    Edit
+}
+
 enum class MedicinePageState {
     List,
     Add,

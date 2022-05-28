@@ -8,12 +8,14 @@ import memberPageState
 import model.MedicinePageState
 import model.MemberPageState
 import model.SupplierPageState
+import model.UserPageState
 import model.database.*
 import org.ktorm.dsl.eq
 import org.ktorm.entity.add
 import org.ktorm.entity.find
 import scope
 import supplierPageState
+import userPageState
 import viewmodel.*
 
 fun addMember() = scope.launch(Dispatchers.IO) {
@@ -129,4 +131,30 @@ fun addSubCategory() = scope.launch(Dispatchers.IO) {
 
     DashboardViewModel.snackbarHostState.showSnackbar("添加子分类（${viewModel.curSubCategoryName}）成功")
     getSubCategoriesByCid(viewModel.curCategoryId)
+}
+
+
+fun addUser() = scope.launch(Dispatchers.IO) {
+    val viewModel = HandleUserPageViewModel
+    val user = User {
+        name = viewModel.name
+        sex = viewModel.sex
+        phone = viewModel.phone
+        idNum = viewModel.idNum
+        type = viewModel.type
+        entry = viewModel.entry
+    }
+
+    try {
+        db.users.add(user)
+    } catch (e: Exception) {
+        DashboardViewModel.snackbarHostState
+            .showSnackbar("添加失败，error: ${e.message}")
+        return@launch
+    }
+
+    userPageState = UserPageState.List
+    searchUsers()
+    DashboardViewModel.snackbarHostState
+        .showSnackbar("添加成功")
 }

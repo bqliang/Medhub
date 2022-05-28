@@ -8,12 +8,14 @@ import memberPageState
 import model.MedicinePageState
 import model.MemberPageState
 import model.SupplierPageState
+import model.UserPageState
 import model.database.*
 import org.ktorm.dsl.eq
 import org.ktorm.entity.find
 import scope
 import supplierPageState
 import ui.page.CategoryListPage
+import userPageState
 import viewmodel.*
 
 fun deleteMember() = scope.launch(Dispatchers.IO) {
@@ -30,6 +32,26 @@ fun deleteMember() = scope.launch(Dispatchers.IO) {
     searchMember()
 
     memberPageState = MemberPageState.List
+
+    DashboardViewModel.snackbarHostState
+        .showSnackbar("删除成功")
+}
+
+
+fun deleteUser() = scope.launch(Dispatchers.IO) {
+    try {
+        db.users
+            .find { it.id eq HandleUserPageViewModel.id }!!
+            .delete()
+    } catch (e: Exception) {
+        DashboardViewModel.snackbarHostState
+            .showSnackbar("删除失败：${e.message}")
+        return@launch
+    }
+
+    searchUsers()
+
+    userPageState = UserPageState.List
 
     DashboardViewModel.snackbarHostState
         .showSnackbar("删除成功")

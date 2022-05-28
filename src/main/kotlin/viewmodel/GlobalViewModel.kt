@@ -6,6 +6,7 @@ import kotlinx.coroutines.Job
 import model.MedicinePageState
 import model.MemberPageState
 import model.SupplierPageState
+import model.UserPageState
 import org.apache.commons.dbcp2.BasicDataSource
 import org.ktorm.database.Database
 import java.util.prefs.Preferences
@@ -37,6 +38,7 @@ val scope by lazy { CoroutineScope(job) }
 
 
 var memberPageState by mutableStateOf(MemberPageState.List)
+var userPageState by mutableStateOf(UserPageState.List)
 var medicinePageState by mutableStateOf(MedicinePageState.List)
 var supplierPageState by mutableStateOf(SupplierPageState.List)
 
