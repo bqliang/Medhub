@@ -66,6 +66,10 @@ fun UserListPage() = Column {
             state = state
         )
     }
+
+    LaunchedEffect(viewModel.users) {
+        searchUsers()
+    }
 }
 
 

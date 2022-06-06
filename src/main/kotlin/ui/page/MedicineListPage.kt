@@ -73,6 +73,10 @@ fun MedicineListPage() = Column {
             state = state
         )
     }
+
+    LaunchedEffect(viewModel.medicines) {
+        searchMedicine()
+    }
 }
 
 

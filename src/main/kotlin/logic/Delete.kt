@@ -135,6 +135,8 @@ fun deleteCategory() = scope.launch(Dispatchers.IO) {
         return@launch
     }
 
+    searchCategory()
+
     DashboardViewModel.snackbarHostState
         .showSnackbar("删除成功")
 }

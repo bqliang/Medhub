@@ -4,8 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.toMutableStateList
-import logic.searchFre
 import model.FreType
 import model.database.Fre
 
@@ -15,10 +13,7 @@ object FreListViewModel {
 
     var showTypeMenu by mutableStateOf(false)
 
-    val fres: SnapshotStateList<Fre> by lazy {
-        searchFre()
-        listOf<Fre>().toMutableStateList()
-    }
+    val fres: SnapshotStateList<Fre> = SnapshotStateList()
 
     fun refresh(list: List<Fre>) {
         fres.clear()

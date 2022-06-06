@@ -68,6 +68,10 @@ fun FreListPage() = Column {
             state = state
         )
     }
+
+    LaunchedEffect(viewModel.fres) {
+        searchFre()
+    }
 }
 
 

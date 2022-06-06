@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import logic.exportSuppliers
 import logic.searchMedicine
+import logic.searchSupplier
 import model.SupplierPageState
 import model.SupplierSearchCondition
 import supplierPageState
@@ -72,6 +73,10 @@ fun SupplierListPage() = Column {
             },
             state = state
         )
+    }
+
+    LaunchedEffect(viewModel.suppliers) {
+        searchSupplier()
     }
 }
 

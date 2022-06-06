@@ -4,8 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.toMutableStateList
-import logic.searchUsers
 import model.UserSearchCondition
 import model.database.User
 
@@ -31,10 +29,7 @@ object UserListPageViewModel {
     /**
      * 用户列表
      */
-    val users: SnapshotStateList<User> by lazy {
-        searchUsers()
-        listOf<User>().toMutableStateList()
-    }
+    val users: SnapshotStateList<User> = SnapshotStateList()
 
     fun refresh(list: List<User>) {
         users.clear()

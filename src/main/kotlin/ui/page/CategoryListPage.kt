@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -71,6 +72,7 @@ fun CategoryListPage() = Row(modifier = Modifier.fillMaxSize()) {
                 }
             }
         )
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
@@ -173,4 +175,9 @@ fun CategoryListPage() = Row(modifier = Modifier.fillMaxSize()) {
             )
         }
     }
+
+    LaunchedEffect(viewModel.categories, viewModel.subCategories) {
+        searchCategory()
+    }
+
 }

@@ -72,6 +72,10 @@ fun MemberListPage() = Column {
             state = state
         )
     }
+
+    LaunchedEffect(viewModel.members) {
+        searchMember()
+    }
 }
 
 
