@@ -24,3 +24,10 @@ enum class SupplierPageState {
     Add,
     Edit
 }
+
+
+enum class CheckoutPageState {
+    Invisible,
+    Purchase,
+    Sales
+}

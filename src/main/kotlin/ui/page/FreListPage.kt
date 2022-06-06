@@ -18,12 +18,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import logic.searchFre
 import model.FreType
-import model.MedicinePageState
 import ui.card.FreCard
 import ui.view.AutoExtendedFAB
 import ui.view.ScrollToTopBtn
 import viewmodel.FreListViewModel
-import viewmodel.HandleMedicinePageViewModel
 
 private val viewModel = FreListViewModel
 

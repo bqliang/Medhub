@@ -1,5 +1,7 @@
 package model.database
 
+import checkoutWindowState
+import model.CheckoutPageState
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf
@@ -14,6 +16,22 @@ import org.ktorm.schema.varchar
  */
 interface Medicine: Entity<Medicine> {
     companion object : Entity.Factory<Medicine>()
+
+    /**
+     * 添加到结算页面的时间
+     */
+    var addTime: Long?
+
+    /**
+     * 结算数量
+     */
+    var checkoutQuantity: Int?
+
+    /**
+     * 结算小计
+     */
+    val subTotal get() = checkoutQuantity!! *
+            if (checkoutWindowState == CheckoutPageState.Sales) price else -purchasePrice
 
     /**
      * 药品编号

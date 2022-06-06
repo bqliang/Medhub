@@ -12,7 +12,7 @@ import org.ktorm.schema.varchar
  * 供应商
  *
  */
-interface Supplier : Entity<Supplier> {
+interface Supplier : Entity<Supplier>, Stakeholder {
     companion object : Entity.Factory<Supplier>()
 
     /**

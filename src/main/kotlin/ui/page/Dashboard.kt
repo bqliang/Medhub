@@ -4,9 +4,9 @@ import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import isDark
@@ -19,6 +19,7 @@ import preferences
 import scope
 import supplierPageState
 import userPageState
+import viewmodel.CheckoutPageViewModel
 import viewmodel.DashboardViewModel
 import viewmodel.LoginPageViewModel
 
@@ -91,7 +92,7 @@ fun Dashboard() = Row {
 
 
 @Composable
-fun MyNavigationRail() = NavigationRail(modifier = Modifier.fillMaxHeight()) {
+private fun MyNavigationRail() = NavigationRail(modifier = Modifier.fillMaxHeight()) {
     RailBarItem.values().forEach { railBarItem ->
         NavigationRailItem(
             icon = { Icon(painterResource(railBarItem.iconPath), null) },
@@ -122,6 +123,7 @@ fun MyNavigationRail() = NavigationRail(modifier = Modifier.fillMaxHeight()) {
         label = { Text("退出登录") },
         onClick = {
             loginSuccessful = false
+            CheckoutPageViewModel.closeCheckoutWindow()
             scope.launch {
                 preferences.putBoolean("login_successful", false)
                 //viewModel.selectRailItem = RailBarItem.MEDICINE

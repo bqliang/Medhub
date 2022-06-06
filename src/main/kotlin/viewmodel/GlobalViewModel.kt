@@ -3,16 +3,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import model.MedicinePageState
-import model.MemberPageState
-import model.SupplierPageState
-import model.UserPageState
+import model.*
 import org.apache.commons.dbcp2.BasicDataSource
 import org.ktorm.database.Database
 import java.util.prefs.Preferences
 
 
-val preferences: Preferences =  Preferences.userRoot().node("MedHub")
+val preferences: Preferences = Preferences.userRoot().node("MedHub")
 
 
 var isDark by mutableStateOf(preferences.getBoolean("dark_theme", false))
@@ -28,9 +25,10 @@ private val basicDataSource = BasicDataSource().apply {
     password = "mysql"
 }
 
+var loginUserId = -1000
+
 // 数据库对象
 val db = Database.connect(basicDataSource)
-
 
 
 private val job by lazy { Job() }
@@ -41,5 +39,4 @@ var memberPageState by mutableStateOf(MemberPageState.List)
 var userPageState by mutableStateOf(UserPageState.List)
 var medicinePageState by mutableStateOf(MedicinePageState.List)
 var supplierPageState by mutableStateOf(SupplierPageState.List)
-
-
+var checkoutWindowState by mutableStateOf(CheckoutPageState.Invisible)

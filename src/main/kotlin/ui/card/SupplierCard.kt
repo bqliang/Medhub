@@ -3,22 +3,18 @@ package ui.card
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.SupplierPageState
 import model.database.Supplier
-import model.database.User
 import supplierPageState
 import ui.contextmenu.SupplierContextMenu
-import ui.contextmenu.UserContextMenu
 import viewmodel.HandleSupplierPageViewModel
 
 @OptIn(ExperimentalMaterialApi::class)

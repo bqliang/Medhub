@@ -1,18 +1,18 @@
 package logic
 
+import checkoutWindowState
 import db
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import loginUserId
 import medicinePageState
 import memberPageState
-import model.MedicinePageState
-import model.MemberPageState
-import model.SupplierPageState
-import model.UserPageState
+import model.*
 import model.database.*
 import org.ktorm.dsl.eq
 import org.ktorm.entity.add
 import org.ktorm.entity.find
+import org.ktorm.entity.maxBy
 import scope
 import supplierPageState
 import userPageState
@@ -157,4 +157,43 @@ fun addUser() = scope.launch(Dispatchers.IO) {
     searchUsers()
     DashboardViewModel.snackbarHostState
         .showSnackbar("添加成功")
+}
+
+
+fun addFre() = scope.launch(Dispatchers.IO) {
+    val viewModel = CheckoutPageViewModel
+
+    val fre = Fre {
+        id = db.fres.maxBy { it.id }!! + 1
+        total = viewModel.list.sumOf { it.subTotal.toDouble() }.toFloat()
+        user = db.users.find { it.id eq loginUserId }!!
+        if (checkoutWindowState == CheckoutPageState.Sales) {
+            member = viewModel.member
+            type = "销售"
+        } else if (checkoutWindowState == CheckoutPageState.Purchase) {
+            supplier = viewModel.supplier
+            type = "采购"
+        }
+    }
+
+    try {
+        db.useTransaction {
+            db.fres.add(fre)
+            viewModel.list.forEach { medicine ->
+                val freItem = FreItem {
+                    this.fre = fre
+                    this.medicine = medicine
+                    this.price = if (checkoutWindowState == CheckoutPageState.Sales) medicine.price else medicine.purchasePrice
+                    this.quantity = medicine.checkoutQuantity!!
+                    this.subTotal = medicine.subTotal
+                }
+                db.freItems.add(freItem)
+            }
+        }
+        CheckoutPageViewModel.closeCheckoutWindow()
+        DashboardViewModel.snackbarHostState.showSnackbar("保存成功")
+        searchMedicine()
+    } catch (e : Exception) {
+        DashboardViewModel.snackbarHostState.showSnackbar("保存失败：${e.message}")
+    }
 }

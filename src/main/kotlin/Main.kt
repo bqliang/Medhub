@@ -10,10 +10,13 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import model.CheckoutPageState
+import ui.page.CheckoutPage
 import ui.page.Dashboard
 import ui.page.LoginPage
 import ui.theme.MedhubTheme
 import ui.view.SlideVisibility
+import viewmodel.CheckoutPageViewModel
 
 fun main() = application {
     Window(
@@ -26,6 +29,22 @@ fun main() = application {
         title = "MedHub",
         content = { App() }
     )
+
+    if (checkoutWindowState != CheckoutPageState.Invisible) {
+        Window(
+            onCloseRequest = { CheckoutPageViewModel.closeCheckoutWindow()},
+            state = rememberWindowState(size = DpSize(900.dp, 650.dp),),
+            icon = painterResource("icon_128px.png"),
+            title = if (checkoutWindowState == CheckoutPageState.Sales) "销售结算单" else "采购结算单",
+            content = {
+                MedhubTheme(isLight = !isDark){
+                    Surface(modifier = Modifier.fillMaxSize()) {
+                        CheckoutPage()
+                    }
+                }
+            }
+        )
+    }
 }
 
 

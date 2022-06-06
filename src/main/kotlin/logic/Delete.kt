@@ -14,7 +14,6 @@ import org.ktorm.dsl.eq
 import org.ktorm.entity.find
 import scope
 import supplierPageState
-import ui.page.CategoryListPage
 import userPageState
 import viewmodel.*
 

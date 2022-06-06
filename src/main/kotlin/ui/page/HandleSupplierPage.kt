@@ -7,14 +7,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import logic.*
-import memberPageState
-import model.MemberPageState
-import model.Sex
+import logic.addSupplier
+import logic.deleteSupplier
+import logic.editSupplier
 import model.SupplierPageState
 import supplierPageState
 import viewmodel.DashboardViewModel
-import viewmodel.HandleMemberPageViewModel
 import viewmodel.HandleSupplierPageViewModel
 
 private val viewModel = HandleSupplierPageViewModel

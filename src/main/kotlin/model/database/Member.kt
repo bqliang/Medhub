@@ -13,7 +13,7 @@ import java.time.LocalDate
  * 会员
  *
  */
-interface Member : Entity<Member> {
+interface Member : Entity<Member>, Stakeholder {
     companion object : Entity.Factory<Member>()
 
     /**

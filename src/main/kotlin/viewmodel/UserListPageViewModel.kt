@@ -5,12 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
-import db
 import logic.searchUsers
 import model.UserSearchCondition
 import model.database.User
-import model.database.users
-import org.ktorm.entity.toList
 
 
 object UserListPageViewModel {

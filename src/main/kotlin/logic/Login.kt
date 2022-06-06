@@ -1,10 +1,10 @@
 package logic
 
-import androidx.compose.runtime.LaunchedEffect
 import db
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import loginSuccessful
+import loginUserId
 import model.database.users
 import org.ktorm.dsl.and
 import org.ktorm.dsl.eq
@@ -12,7 +12,6 @@ import org.ktorm.entity.find
 import preferences
 import scope
 import utils.md5
-import viewmodel.DashboardViewModel
 import viewmodel.LoginPageViewModel
 
 private val viewModel = LoginPageViewModel
@@ -36,6 +35,7 @@ fun login() = scope.launch(Dispatchers.IO) {
     } else {
 
         loginSuccessful = true
+        loginUserId = user.id
 
         preferences.apply {
             put("account", account)

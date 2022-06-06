@@ -24,7 +24,6 @@ import model.MedicineSearchCondition
 import ui.card.MedicineCard
 import ui.view.AutoExtendedFAB
 import ui.view.ScrollToTopBtn
-import ui.view.isScrollingUp
 import viewmodel.HandleMedicinePageViewModel
 import viewmodel.MedicineListPageViewModel
 

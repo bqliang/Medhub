@@ -16,12 +16,12 @@ interface Fre: Entity<Fre> {
     /**
      * 财政收支编号
      */
-    val id: Int
+    var id: Int
 
     /**
      * 收支类型（采购、销售）
      */
-    val type: String
+    var type: String
 
     /**
      * 收支时间
@@ -31,22 +31,22 @@ interface Fre: Entity<Fre> {
     /**
      * 收支总额
      */
-    val total: Float
+    var total: Float
 
     /**
      * 经手人
      */
-    val user: User
+    var user: User
 
     /**
      * 供应商
      */
-    val supplier: Supplier?
+    var supplier: Supplier?
 
     /**
      * 会员
      */
-    val member: Member?
+    var member: Member?
 }
 
 

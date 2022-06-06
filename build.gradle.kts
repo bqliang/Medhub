@@ -55,7 +55,7 @@ compose.desktop {
 
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "MedHub"
-            packageVersion = "1.0.0"
+            packageVersion = "1.5.0"
             description = "Medicine sales manager App, fully based on Compose."
             copyright = "© 2022 bqliang. All rights reserved."
             vendor = "bqliang"

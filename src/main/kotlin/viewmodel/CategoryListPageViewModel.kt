@@ -6,10 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import logic.searchCategory
-import logic.searchSupplier
 import model.database.Category
 import model.database.SubCategory
-import model.database.Supplier
 
 object CategoryListPageViewModel {
 

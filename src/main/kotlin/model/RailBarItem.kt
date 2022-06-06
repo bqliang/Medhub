@@ -1,7 +1,5 @@
 package model
 
-import androidx.compose.runtime.State
-
 enum class RailBarItem(val string: String, val iconPath: String) {
     MEDICINE("药品管理", "medication_white_24dp.svg"),
     FRE("财政收支", "account_balance_white_24dp.svg"),

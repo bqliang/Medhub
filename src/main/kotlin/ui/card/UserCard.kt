@@ -1,6 +1,5 @@
 package ui.card
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
@@ -16,9 +15,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.database.User
 import ui.contextmenu.UserContextMenu
-import ui.page.HandleMemberPage
-import ui.page.HandleUsererPage
-import viewmodel.HandleMemberPageViewModel
 import viewmodel.HandleUserPageViewModel
 
 @OptIn(ExperimentalMaterialApi::class)

@@ -17,27 +17,27 @@ interface FreItem: Entity<FreItem> {
     /**
      * 所属财政收支
      */
-    val fre: Fre
+    var fre: Fre
 
     /**
      * 药品
      */
-    val medicine: Medicine
+    var medicine: Medicine
 
     /**
      * 彼时单价
      */
-    val price: Float
+    var price: Float
 
     /**
      * 数量
      */
-    val quantity: Int
+    var quantity: Int
 
     /**
      * 金额小计
      */
-    val subTotal: Float
+    var subTotal: Float
 }
 
 

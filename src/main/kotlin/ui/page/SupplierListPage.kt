@@ -16,21 +16,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import logic.exportMedicines
 import logic.exportSuppliers
 import logic.searchMedicine
-import model.MedicinePageState
-import model.MedicineSearchCondition
 import model.SupplierPageState
 import model.SupplierSearchCondition
 import supplierPageState
-import ui.card.MedicineCard
 import ui.card.SupplierCard
 import ui.view.AutoExtendedFAB
 import ui.view.ScrollToTopBtn
-import viewmodel.HandleMedicinePageViewModel
 import viewmodel.HandleSupplierPageViewModel
-import viewmodel.MedicineListPageViewModel
 import viewmodel.SupplierListPageViewModel
 
 private val viewModel = SupplierListPageViewModel

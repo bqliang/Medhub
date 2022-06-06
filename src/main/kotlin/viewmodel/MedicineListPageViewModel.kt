@@ -1,13 +1,13 @@
 package viewmodel
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import db
+import androidx.compose.runtime.toMutableStateList
 import logic.searchMedicine
 import model.MedicineSearchCondition
 import model.database.Medicine
-import model.database.medicines
-import org.ktorm.entity.toList
 
 object MedicineListPageViewModel {
 
