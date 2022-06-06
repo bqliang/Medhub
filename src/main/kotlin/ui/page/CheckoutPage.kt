@@ -28,7 +28,7 @@ private val viewModel = CheckoutPageViewModel
 
 @Composable
 fun CheckoutPage() = Column(modifier = Modifier.fillMaxSize()) {
-    val medicines = CheckoutPageViewModel.list.sortedBy { it.addTime }
+    val medicines = viewModel.list.sortedBy { it.addTime }
     val state = rememberLazyListState()
     val scope = rememberCoroutineScope()
 

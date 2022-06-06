@@ -31,3 +31,9 @@ enum class CheckoutPageState {
     Purchase,
     Sales
 }
+
+
+enum class FrePageState {
+    List,
+    Details
+}

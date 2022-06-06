@@ -12,13 +12,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.database.Fre
 import utils.string
+import viewmodel.FreDetailsPageViewmodel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FreCard(fre: Fre) = Card(
     elevation = 4.dp,
-    onClick = {
-    },
+    onClick = { FreDetailsPageViewmodel.startFreDetailsPage(fre) },
     content = {
         Box(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
             Column(modifier = Modifier.align(Alignment.TopStart)) {

@@ -308,8 +308,6 @@ fun HandleMedicinePage() = Column(modifier = Modifier.fillMaxSize()) {
             onClick = { if (medicinePageState == MedicinePageState.Add) addMedicine() else editMedicine() }
         )
     }
-
-
 }
 
 

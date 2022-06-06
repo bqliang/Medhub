@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import frePageState
 import isDark
 import kotlinx.coroutines.launch
 import loginSuccessful
@@ -41,7 +42,7 @@ fun Dashboard() = Row {
         ) { selectRailItem ->
             when (selectRailItem) {
                 RailBarItem.MEDICINE -> MedicinePage()
-                RailBarItem.FRE -> FreListPage()
+                RailBarItem.FRE -> FrePage()
                 RailBarItem.MEMBER -> MemberPage()
                 RailBarItem.USER -> UserPage()
                 RailBarItem.SUPPLIER -> SupplierPage()
@@ -169,5 +170,14 @@ private fun UserPage() = Crossfade(userPageState) { state ->
     when (state) {
         UserPageState.List -> UserListPage()
         else -> HandleUsererPage()
+    }
+}
+
+
+@Composable
+private fun FrePage() = Crossfade(frePageState) { state ->
+    when (state) {
+        FrePageState.List -> FreListPage()
+        FrePageState.Details -> FreDetailsPage()
     }
 }

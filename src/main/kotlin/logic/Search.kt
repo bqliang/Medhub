@@ -11,6 +11,8 @@ import model.database.*
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.like
 import org.ktorm.entity.filter
+import org.ktorm.entity.sortedBy
+import org.ktorm.entity.sortedByDescending
 import org.ktorm.entity.toList
 import scope
 import viewmodel.*
@@ -93,6 +95,7 @@ fun searchFre() = scope.launch(Dispatchers.IO) {
     val fres = db.fres
         .filter { it.type like "%${viewModel.fresType.searchKeyword}%" }
         .filter { it.id like "%${keyword}%" }
+        .sortedByDescending { it.time }
         .toList()
 
     viewModel.refresh(fres)
