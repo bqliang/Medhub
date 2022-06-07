@@ -6,7 +6,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollbarAdapter
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,23 +19,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import db
 import frePageState
-import logic.addFre
-import logic.deleteMedicine
-import model.CheckoutPageState
 import model.FrePageState
-import model.MedicinePageState
 import model.database.freItems
 import org.ktorm.dsl.eq
 import org.ktorm.entity.filter
 import org.ktorm.entity.toList
-import ui.card.CheckoutCard
 import ui.card.FreItemCard
 import ui.view.ScrollToTopBtn
 import utils.string
-import viewmodel.CheckoutPageViewModel
 import viewmodel.DashboardViewModel
 import viewmodel.FreDetailsPageViewmodel
-import viewmodel.FreDetailsPageViewmodel.fre
 
 private val viewModel = FreDetailsPageViewmodel
 
@@ -91,7 +87,7 @@ fun FreDetailsPage() = Column(modifier = Modifier.fillMaxSize()) {
         Text(text = viewModel.fre.time.string)
     }
 
-    LaunchedEffect(viewModel.freItems) {
+    LaunchedEffect(viewModel.fre) {
         viewModel.freItems = db.freItems.filter { it.fre_id eq  viewModel.fre.id }.toList().toMutableStateList()
     }
 

@@ -164,7 +164,7 @@ fun addFre() = scope.launch(Dispatchers.IO) {
     val viewModel = CheckoutPageViewModel
 
     val fre = Fre {
-        id = db.fres.maxBy { it.id }?:100 + 1
+        id = (db.fres.maxBy { it.id }?:100) + 1
         total = viewModel.list.sumOf { it.subTotal.toDouble() }.toFloat()
         user = db.users.find { it.id eq loginUserId }!!
         if (checkoutWindowState == CheckoutPageState.Sales) {

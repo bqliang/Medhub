@@ -16,10 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import logic.exportFres
 import logic.searchFre
 import model.FreType
 import ui.card.FreCard
-import ui.view.AutoExtendedFAB
 import ui.view.ScrollToTopBtn
 import viewmodel.FreListViewModel
 
@@ -60,13 +60,6 @@ fun FreListPage() = Column {
         )
         
         ScrollToTopBtn(showScrollToTopBtn, state, scope)
-
-        AutoExtendedFAB(
-            onClick = {
-
-            },
-            state = state
-        )
     }
 
     LaunchedEffect(viewModel.fres) {
@@ -133,4 +126,17 @@ private fun SearchBar() = Row(
             }
         )
     }
+
+    Spacer(modifier = Modifier.width(16.dp))
+
+    OutlinedButton(
+        modifier = Modifier.padding(top = 8.dp),
+        onClick = { exportFres() },
+        content = {
+            Icon(painterResource("file_export_white_24dp.svg"), null)
+            Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
+            Text("导出")
+        }
+    )
+
 }

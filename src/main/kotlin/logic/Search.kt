@@ -11,7 +11,6 @@ import model.database.*
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.like
 import org.ktorm.entity.filter
-import org.ktorm.entity.sortedBy
 import org.ktorm.entity.sortedByDescending
 import org.ktorm.entity.toList
 import scope

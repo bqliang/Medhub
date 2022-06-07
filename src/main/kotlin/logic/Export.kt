@@ -4,9 +4,7 @@ import com.alibaba.excel.EasyExcel
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy
 import db
 import kotlinx.coroutines.launch
-import model.database.medicines
-import model.database.members
-import model.database.suppliers
+import model.database.*
 import org.ktorm.entity.map
 import scope
 import utils.desktopPath
@@ -121,4 +119,82 @@ fun exportSuppliers() = scope.launch {
 
     DashboardViewModel.snackbarHostState
         .showSnackbar("导出成功：${pathName}")
+}
+
+
+fun exportFres() = scope.launch {
+    val pathName = "${desktopPath}\\财政收支信息表_${System.currentTimeMillis()}.xlsx"
+
+    try {
+        val excelWriter = EasyExcel
+            .write(pathName)
+            .registerWriteHandler(LongestMatchColumnWidthStyleStrategy())
+            .build()
+
+        val sheet1 = EasyExcel
+            .writerSheet(1, "财政收支单")
+            .head(
+                arrayListOf(
+                    arrayListOf("收支编号"),
+                    arrayListOf("类型"),
+                    arrayListOf("总金额"),
+                    arrayListOf("经手人"),
+                    arrayListOf("供应商"),
+                    arrayListOf("客户"),
+                    arrayListOf("时间")
+                ) as List<List<String>>
+            )
+            .build()
+
+        val data1 = db.fres.map {
+            arrayListOf(
+                it.id,
+                it.type,
+                it.total,
+                it.user.name,
+                if (it.type == "销售") "" else it.supplier!!.name,
+                if (it.type == "销售") it.member!!.name else "",
+                it.time.toString()
+            )
+        }
+
+        val sheet2 = EasyExcel
+            .writerSheet(2, "财政流水")
+            .head(
+                arrayListOf(
+                    arrayListOf("所属财政编号"),
+                    arrayListOf("类型"),
+                    arrayListOf("药品编号"),
+                    arrayListOf("药品名称"),
+                    arrayListOf("价格"),
+                    arrayListOf("数量"),
+                    arrayListOf("小计"),
+                    arrayListOf("时间"),
+                ) as List<List<String>>
+            )
+            .build()
+
+        val data2 = db.freItems.map {
+            arrayListOf(
+                it.fre.id,
+                it.fre.type,
+                it.medicine.id,
+                it.medicine.name,
+                it.price,
+                it.quantity,
+                it.subTotal,
+                it.fre.time.toString()
+            )
+        }
+
+        excelWriter.write(data1, sheet1)
+        excelWriter.write(data2, sheet2)
+        excelWriter.finish()
+
+    } catch (e: Exception) {
+        e.printStackTrace()
+        DashboardViewModel.snackbarHostState.showSnackbar("导出失败：${e.message}")
+        return@launch
+    }
+    DashboardViewModel.snackbarHostState.showSnackbar("导出成功：${pathName}")
 }
