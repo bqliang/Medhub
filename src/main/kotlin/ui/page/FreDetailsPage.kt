@@ -17,13 +17,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import db
 import frePageState
 import model.FrePageState
-import model.database.freItems
-import org.ktorm.dsl.eq
-import org.ktorm.entity.filter
-import org.ktorm.entity.toList
 import ui.card.FreItemCard
 import ui.view.ScrollToTopBtn
 import utils.string
@@ -86,11 +81,6 @@ fun FreDetailsPage() = Column(modifier = Modifier.fillMaxSize()) {
         Spacer(modifier = Modifier.width(16.dp))
         Text(text = viewModel.fre.time.string)
     }
-
-    LaunchedEffect(viewModel.fre) {
-        viewModel.freItems = db.freItems.filter { it.fre_id eq  viewModel.fre.id }.toList().toMutableStateList()
-    }
-
 }
 
 
