@@ -100,3 +100,4 @@ hs_err_pid*
 
 /build/wixToolset/
 /build/reports/tests/
+/build/
