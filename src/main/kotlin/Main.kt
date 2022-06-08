@@ -22,7 +22,7 @@ fun main() = application {
     Window(
         onCloseRequest = ::exitApplication,
         state = rememberWindowState(
-            size = DpSize(900.dp, 650.dp),
+            size = DpSize(900.dp, 680.dp),
             position = WindowPosition(Alignment.Center)
         ),
         icon = painterResource("icon_128px.png"),
@@ -33,7 +33,7 @@ fun main() = application {
     if (checkoutWindowState != CheckoutPageState.Invisible) {
         Window(
             onCloseRequest = { CheckoutPageViewModel.closeCheckoutWindow()},
-            state = rememberWindowState(size = DpSize(900.dp, 650.dp),),
+            state = rememberWindowState(size = DpSize(900.dp, 680.dp),),
             icon = painterResource("icon_128px.png"),
             title = if (checkoutWindowState == CheckoutPageState.Sales) "销售结算单" else "采购结算单",
             content = {

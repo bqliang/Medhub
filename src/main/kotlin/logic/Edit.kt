@@ -1,8 +1,10 @@
 package logic
 
+import changePasswordPageVisible
 import db
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import loginUserId
 import medicinePageState
 import memberPageState
 import model.MedicinePageState
@@ -15,6 +17,7 @@ import org.ktorm.entity.find
 import scope
 import supplierPageState
 import userPageState
+import utils.md5
 import viewmodel.*
 
 
@@ -167,4 +170,25 @@ fun editUser() = scope.launch(Dispatchers.IO) {
     userPageState = UserPageState.List
     DashboardViewModel.snackbarHostState
         .showSnackbar("修改成功")
+}
+
+
+fun editPassword() = scope.launch(Dispatchers.IO) {
+    val viewModel = ChangePasswordPageViewModel
+
+    try {
+        val user = db.users.find { it.id eq loginUserId }
+        if (viewModel.oldPassword.md5 != user!!.password) {
+            viewModel.snackbarHostState.showSnackbar("修改失败（原密码不正确）")
+            return@launch
+        } else {
+            user.password = viewModel.passwordConfirm
+            user.flushChanges()
+        }
+    } catch (e: Exception) {
+        viewModel.snackbarHostState.showSnackbar("发生错误：${e.message}")
+    }
+
+    changePasswordPageVisible = false
+    DashboardViewModel.snackbarHostState.showSnackbar("密码修改成功")
 }

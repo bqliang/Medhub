@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import changePasswordPageVisible
 import frePageState
 import isDark
 import kotlinx.coroutines.launch
@@ -30,6 +31,10 @@ private val viewModel = DashboardViewModel
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun Dashboard() = Row {
+
+    if(changePasswordPageVisible) {
+        ChangePasswordPage()
+    }
 
     MyNavigationRail()
 
@@ -107,6 +112,19 @@ private fun MyNavigationRail() = NavigationRail(modifier = Modifier.fillMaxHeigh
     NavigationRailItem(
         icon = {
             Icon(
+                painter = painterResource("lock_FILL0_wght500_GRAD0_opsz24.svg"),
+                contentDescription = null
+            )
+        },
+        label = { Text("修改密码") },
+        onClick = { changePasswordPageVisible = true },
+        selected = false,
+        alwaysShowLabel = false
+    )
+
+    NavigationRailItem(
+        icon = {
+            Icon(
                 painter = painterResource(if (isDark) "light_mode_white_24dp.svg" else "dark_mode_white_24dp.svg"),
                 contentDescription = null
             )
@@ -119,6 +137,7 @@ private fun MyNavigationRail() = NavigationRail(modifier = Modifier.fillMaxHeigh
         selected = false,
         alwaysShowLabel = false
     )
+
     NavigationRailItem(
         icon = { Icon(painterResource("logout_white_24dp.svg"), contentDescription = null) },
         label = { Text("退出登录") },
