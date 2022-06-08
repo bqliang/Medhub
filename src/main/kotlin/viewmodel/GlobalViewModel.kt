@@ -16,13 +16,18 @@ var isDark by mutableStateOf(preferences.getBoolean("dark_theme", false))
 
 var loginSuccessful by mutableStateOf(false)
 
+private val DB_HOST by lazy { System.getenv("MEDHUB_DB_HOST") }
+private val DB_USERNAME by lazy { System.getenv("MEDHUB_DB_USERNAME") }
+private val DB_PASSWORD by lazy { System.getenv("MEDHUB_DB_PASSWORD") }
 
 // 连接池对象
-private val basicDataSource = BasicDataSource().apply {
-    driverClassName = "com.mysql.cj.jdbc.Driver"
-    url = "jdbc:mysql://112.74.75.19:3306/medhub"
-    username = "bqliang"
-    password = "mysql"
+private val basicDataSource by lazy {
+    BasicDataSource().apply {
+        driverClassName = "com.mysql.cj.jdbc.Driver"
+        url = "jdbc:mysql://${DB_HOST}:3306/medhub"
+        username = DB_USERNAME
+        password = DB_PASSWORD
+    }
 }
 
 var loginUserId = -1000
